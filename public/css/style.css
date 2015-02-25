@@ -8,14 +8,15 @@ canvas {
 	/*display: none;*/ 
 }
 a {font-size: 80px;color:blue;}
-      #debugCanvas{
+#debugCanvas{
         position: absolute;
+        display: none;
         z-index: -1;
         left: 50%;
         top: 50%;
         margin-top: -30px;
         margin-left: -40px;
-      }
+}
 #videoSource{
 /*	display: none;*/
 

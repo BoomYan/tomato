@@ -42,23 +42,64 @@
 var debugCanvas = document.getElementById("debugCanvas");
 var vid = document.getElementById("videoSource");
 var detectPoints = new DetectPoints(debugCanvas);
+var canUpdateBullet=true;
+detectPoints.init();
 
 waitForSelect();
 
 var render       = function () {
+
+
+	detectPoints.draw();
+
 	if (gameStop) return;
+
+	var me,shift,temp;
+
+
+	if (role == 'tom')me= tom;
+	else	me = jerry;
+
+
+
+	if(bullet.position.z<jerry.position.z || bullet.position.z>tom.position.z)
+	{
+		bullet.position.z=me.position.z;
+		canUpdateBullet = false;
+	}	
+
+
+	if(detectPoints.outputPoint)
+	{
+		//ready for new bullet
+
+		temp = detectPoints.outputPoint;
+
+		if (role == 'tom')
+		shift = 1*(temp-40)/40;
+		else shift = -1*(temp-40)/40;
+
+		bullet.position.x=me.position.x+shift;
+
+		canUpdateBullet = true;
+	}
+
+	console.log(canUpdateBullet);
+	if(canUpdateBullet)
+	updateBullet();
+
 	result();
-	if (role == 'tom'){
-		// nextTom();			
-		updateCharacter(tom);
-		emitPosition(tom);
-		setCamera(tom.position.x,tom.position.y,tom.position.z);
-	}
-	else{
-		updateCharacter(jerry);
-		emitPosition(jerry);
-		setCamera(jerry.position.x,jerry.position.y,jerry.position.z);
-	}
+	// if (role == 'tom'){
+		// nextTom();
+	updateCharacter(me);
+	emitPosition(me);
+	setCamera(me.position.x,me.position.y,me.position.z);
+	// }
+	// else{
+	// 	updateCharacter(jerry);
+	// 	emitPosition(jerry);
+	// 	setCamera(jerry.position.x,jerry.position.y,jerry.position.z);
+	// }
 	// updateJerry();
 	// updateJerrySpeed();
 	// updateDistanceRemained();

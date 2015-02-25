@@ -2,7 +2,7 @@
 
 	//UNIVERSAL VARIABLES
 	var cubeSize               = 1;
-	var disBetTandJ            = 10;
+	var disBetTandJ            = 5;
 	var metaNormalSpeed        = 0.05;
 	var normalSpeed            = 0;//0.05
 	var jerrySpeed             = normalSpeed;//0.08
@@ -14,7 +14,7 @@
 	var targetDistance         = 100;
 	var distanceRemained       = targetDistance;
 	var jerryMetaShift         = 5;
-	var tomMetaShift           = 2;
+	var tomMetaShift           = 5;
 	var hitScale               = 1.0;//when detecting catch
 	//var role                   = document.location.pathname.slice(1);
 	var role  				   = '';
@@ -79,7 +79,6 @@
 	scene.add( hemiLight );
 
 	//CAMERA
-
 	var camera                 = new THREE.PerspectiveCamera( 90, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
 
@@ -150,15 +149,13 @@
 	scene.add( tom );
 	tom.position.z             = disBetTandJ;
 
-	// //Cube3	- Food
+	//Cube3	- bullet
 
-	// var foodGeometry           = new THREE.BoxGeometry( cubeSize*5, cubeSize*5, cubeSize*5 );
-	// var foodMaterial           = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
-	// var food                   = new THREE.Mesh( foodGeometry, foodMaterial );
-	// food.position.z            = targetDistance;
-	// scene.add( food );
-
-
+	var bulletGeometry           = new THREE.BoxGeometry( cubeSize/5, cubeSize/5, cubeSize/5 );
+	var bulletMaterial           = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+	var bullet                   = new THREE.Mesh( bulletGeometry, bulletMaterial );
+	bullet.position.z			= 5;
+	scene.add( bullet );
 
 	//RENDERER
 	var renderer               = new THREE.WebGLRenderer();
@@ -175,7 +172,7 @@
 	// exports.cube0           = cube0;
 	exports.jerry              = jerry;
 	exports.tom                = tom;
-	// exports.food               = food;
+	exports.bullet               = bullet;
 	exports.renderer           = renderer;
 	exports.faceDetection      = faceDetection;
 

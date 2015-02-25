@@ -1,7 +1,9 @@
 //forked from Karen Peng
-
+//later modified by Jiaming Yan
 
 (function (exports) {
+
+
 
   function colorDiff(colorA, colorB) {
     var rDiff = Math.abs(colorA[0] - colorB[0]);
@@ -23,6 +25,9 @@
     this.previousColorY = [];
     this.colorDiffShrehold = 40;
     this.points = [];
+    this.leftPoint;
+    this.rightPoint;
+    this.outputPoint;
   }
 
   DetectPoints.prototype.init = function () {
@@ -89,6 +94,12 @@
       var getIndexes = [];
       var afterX = [];
       var afterY = [];
+      var temp;
+
+      this.leftPoint=this.width/2;
+      this.rightPoint=this.width/2;
+      this.outputPoint=null;
+
       for (var it = 1; it < rawPointsX.length - 1; it++) {
         if (rawPointsX[it][0] + this.sampleRate !== rawPointsX[it + 1][0] ||
           rawPointsX[it][0] - this.sampleRate !== rawPointsX[it - 1][0]) {
@@ -107,13 +118,23 @@
         for (var x = 0; x < afterX.length; x++) {
           for (var y = 0; y < afterY.length; y++) {
             if (afterX[x][0] === afterY[y][0] && afterX[x][1] === afterY[y][1]) {
-              this.points.push(new Point(afterX[x][0], afterX[x][1],
-                "#ff00ff"));
+              // this.points.push(new Point(afterX[x][0], afterX[x][1],
+              //   "#ff00ff"));
+              if(afterX[x][1]<this.height/8){
+                if(afterX[x][0]<this.leftPoint)this.leftPoint= afterX[x][0];
+                if(afterX[x][0]>this.rightPoint)this.rightPoint= afterX[x][0];                
+              // console.log("x:  "+afterX[x][0]);
+              // console.log("y:  "+afterX[x][1]);
+              }
             }
 
           }
         }
       }
+      if (this.leftPoint!=this.width/2)
+      this.outputPoint=this.leftPoint;
+      if (this.rightPoint!=this.width/2)
+      this.outputPoint=this.rightPoint;
     }
 
     //for debuging changes detection
@@ -131,6 +152,7 @@
     this.y = y;
     this.fillStyle = fillStyle;
   }
+
   Point.prototype.render = function (can, radius) {
     ctx = can.getContext("2d");
     ctx.fillStyle = this.fillStyle;

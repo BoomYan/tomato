@@ -99,6 +99,13 @@
 		// jerry.position.z +=jerrySpeed;
 	}
 
+	var updateBullet = function(){
+		if(role=='jerry')
+		bullet.position.z += 0.1;
+		else
+		bullet.position.z -= 0.1;
+	
+	}
 
 	// exports.nextTom                                        = nextTom;
 	exports.setCamera                                      = setCamera;
@@ -107,6 +114,7 @@
 	exports.isHit                                          = isHit;
 	// exports.updateJerrySpeed                               = updateJerrySpeed;
 	exports.updateCharacter                                = updateCharacter;
+	exports.updateBullet = updateBullet;
 
 
 
