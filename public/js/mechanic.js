@@ -50,10 +50,9 @@
 	}
 
 
-	// var updateDistanceRemained                             = function(){
-	// 	// var distanceRemained                                  = Math.round(food.position.z-jerry.position.z-3*cubeSize);
-	// 	// document.getElementById('distanceRemained').innerHTML = 'Distance Remained For Jerry: '+distanceRemained;
-	// }
+	var updateBlood                             = function(){
+		document.getElementById('bloodRemained').innerHTML = 'Blood Remained For you: '+blood;
+	}
 
 	// var updateJerrySpeed                                   = function(){
 	// 	jerrySpeed                                            = normalSpeed * (1+5*(targetDistance - distanceRemained)/targetDistance);
@@ -104,7 +103,7 @@
 		bullet.position.z += 0.1;
 		else
 		bullet.position.z -= 0.1;
-	
+
 	}
 
 	// exports.nextTom                                        = nextTom;
@@ -115,7 +114,7 @@
 	// exports.updateJerrySpeed                               = updateJerrySpeed;
 	exports.updateCharacter                                = updateCharacter;
 	exports.updateBullet = updateBullet;
-
+	exports.updateBlood = updateBlood;
 
 
 })(this);

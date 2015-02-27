@@ -23,6 +23,7 @@
 	var jerryReady             = false;
 	var fpv                    = true;
 	var selectedRoleByOpponent = '';
+	var blood				   = 10;
 
 	exports.cubeSize           = cubeSize;
 	exports.disBetTandJ        = disBetTandJ;
@@ -45,6 +46,7 @@
 	exports.jerryReady         = jerryReady;
 	exports.fpv                = fpv;
 	exports.selectedRoleByOpponent = selectedRoleByOpponent;
+	exports.blood 				= blood;
 
 	//SOCKET
 	var socket                 = io.connect('http://' + location.host);
@@ -132,7 +134,7 @@
 
 	//Cube1 - Jerry
 
-	var geometry               = new THREE.BoxGeometry( cubeSize, cubeSize, cubeSize );
+	var geometry               = new THREE.BoxGeometry( cubeSize*10, cubeSize*10, cubeSize/5 );
 	var material               = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 	var jerry                  = new THREE.Mesh( geometry, material );
 	jerry.castShadow           = true;
@@ -141,7 +143,7 @@
 
 	//Cube2 - Tom
 
-	var geometry               = new THREE.BoxGeometry( cubeSize, cubeSize, cubeSize);
+	var geometry               = new THREE.BoxGeometry( cubeSize*10, cubeSize*10, cubeSize/5);
 	var material               = new THREE.MeshBasicMaterial( { color: 0x0000ff } );
 	var tom                    = new THREE.Mesh( geometry, material );
 	tom.castShadow             = true;
@@ -151,10 +153,11 @@
 
 	//Cube3	- bullet
 
-	var bulletGeometry           = new THREE.BoxGeometry( cubeSize/5, cubeSize/5, cubeSize/5 );
+	var bulletGeometry           = new THREE.BoxGeometry( cubeSize/6, cubeSize/6, cubeSize/10 );
 	var bulletMaterial           = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
 	var bullet                   = new THREE.Mesh( bulletGeometry, bulletMaterial );
 	bullet.position.z			= 5;
+	bullet.position.y			= tom.position.y;
 	scene.add( bullet );
 
 	//RENDERER

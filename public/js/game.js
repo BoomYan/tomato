@@ -9,6 +9,7 @@
 		jerry.position.z                                      = 0;
 		tom.position.x                                        = 0;
 		tom.position.z                                        = disBetTandJ;
+		blood =10;
 	}
 
 	var resetCamera = function(){

@@ -7,7 +7,7 @@
     <canvas id="debugCanvas" width="80px" height="60px"></canvas>
 	<video id       = "videoSource" muted autoplay width="240px" height="200px"></video>
 	<a id           = "Catch"></a>
-	<a id           = "distanceRemained"></a>
+	<a id           = "bloodRemained"></a>
 	<div id         = "result">
 		<p id          = "resultMSG">ooops</p>
 		<button id     = "anotherRound">Another Round</button>
@@ -61,17 +61,26 @@ var render       = function () {
 	else	me = jerry;
 
 
+	//is bullet out of range? then reset the bullet
+
+
+	// canUpdateBullet = true;
 
 	if(bullet.position.z<jerry.position.z || bullet.position.z>tom.position.z)
 	{
-		bullet.position.z=me.position.z;
-		canUpdateBullet = false;
+
 	}	
 
+	if((bullet.position.z - me.position.z)==0){
+		canUpdateBullet = false;
+	}
 
+	// if(detectPoints.outputPoint && (bullet.position.z<jerry.position.z || bullet.position.z>tom.position.z))
 	if(detectPoints.outputPoint)
 	{
-		//ready for new bullet
+		//can shoot the new bullet
+
+		bullet.position.z=me.position.z;
 
 		temp = detectPoints.outputPoint;
 
@@ -81,11 +90,11 @@ var render       = function () {
 
 		bullet.position.x=me.position.x+shift;
 
-		canUpdateBullet = true;
+		// canUpdateBullet = true;
 	}
 
 	console.log(canUpdateBullet);
-	if(canUpdateBullet)
+	// if(canUpdateBullet)
 	updateBullet();
 
 	result();
@@ -102,7 +111,7 @@ var render       = function () {
 	// }
 	// updateJerry();
 	// updateJerrySpeed();
-	// updateDistanceRemained();
+	updateBlood();
 	renderer.render(scene, camera);
 };
 
